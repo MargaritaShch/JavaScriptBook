@@ -116,7 +116,6 @@ if (login == 'Сотрудник') {
 } else {
   message = '';
 }*/
-
 // let login = prompt('User:', '')
 // let message = (login == 'Сотрудник') ?  'Привет':
 //     (login == 'Директор') ? 'Здравствуйте':
@@ -283,7 +282,70 @@ if (number === 2 || number === 3) {
 //             console.log('Undefined')
 // }//DONE
 
+/*29.Следующая функция возвращает true, если параметр age больше 18.В ином случае она задаёт вопрос confirm и возвращает его результат.Перепишите функцию, чтобы она делала то же самое, но без if, в одну строку.Сделайте два варианта функции checkAge:1.Используя оператор ? 2.Используя оператор || 
+function checkAge(age) {
+  if (age > 18) {
+    return true;
+  } else {
+    return confirm('Родители разрешили?');
+  }
+}*/
+function checkAge(age){
+    return (age > 18) ? true: 'Родители разрешили?';
+}
+console.log(checkAge(19))//true - DONE
+console.log(checkAge(17))//Родители разрешили? - DONE
 
+function checkAge2(age){
+    return age > 18 ||'Родители разрешили?';
+}
+console.log(checkAge2(20))//true - DONE
+console.log(checkAge2(16))//Родители разрешили? - DONE
 
+//30.Напишите функцию min(a,b), которая возвращает меньшее из чисел a и b.
+function min(numFirst, numSecond){
+    return numFirst< numSecond ? numFirst:numSecond;
+}
+console.log(min(2, 5))//2 - DONE
+console.log(min(3, -1))//-1 - DONE
+console.log(min(1, 1) )//1 - DONE
 
+//31.Напишите функцию pow(x,n), которая возводит x в степень n и возвращает результат.
+function pow(x,n){
+    let result =0
+    if(x <0 || n<0 || n%1 !== 0 || x%1 !==0){
+     result ='Functuon suppurts only natural or integrs numbers'
+      
+    } else{
+        result = x**n
+    }
+    return result
+}
+console.log(pow(3, 2))//9- DONE
+console.log(pow(3, 3))//27- DONE
+console.log(pow(1, 100))//1- DONE
+console.log(pow(1, -100))//Functuon suppurts only natural numbers - DONE
+console.log(pow(-3, 3.5))//Functuon suppurts only natural numbers - DONE
+console.log(pow(3.5, 3))//Functuon suppurts only natural numbers - DONE
 
+/*32.Замените код Function Expression стрелочной функцией:
+function ask(question, yes, no) {
+  if (confirm(question)) yes()
+  else no();
+}
+
+ask(
+  "Вы согласны?",
+  function() { alert("Вы согласились."); },
+  function() { alert("Вы отменили выполнение."); }
+);*/
+// let ask =(question, yes, no)=>{
+//     if (confirm(question)) yes()
+//     else no()  
+// }
+
+// ask(
+//     "Вы согласны?",
+//     () => { alert("Вы согласились."); },
+//     () => { alert("Вы отменили выполнение."); }
+//   );//DONE
