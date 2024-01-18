@@ -150,13 +150,151 @@ console.log(styles)//Рэп, Регги, Классика, Рок-н-ролл - 
 Задача: найти непрерывный подмассив в arr, сумма элементов в котором максимальна.Функция getMaxSubSum(arr) должна возвращать эту сумму.*/
 
 function getMaxSubSum(arr){
+    //вывод суммы
     let sum = 0;
-
+    //вывод максимальной суммы элементов
+    let maxSum = 0;
+    //проходимся по массиву
+    for(num of arr){
+        //к макс сумме добавляем эл-ты массива
+        maxSum +=num;
+        //находим максимальную сумму: т.е. есть arr = [1, -2, 3, 4, -9, 6] => 
+        //num =1; sum =1; maxSun = 1 => Math.max(1,1)
+        //num =-2; sum =1; maxSum = -1 => Math.max(1,-1)
+        //num =3; sum = 1; maxSum = 4 => Math.max(1,4)
+        //num =4; sum = 4; maxSum =8 => Math.max(4,8)
+        //num =-9; sum =8; maxSum = -1 => Math.max(8,-1)
+        //num =6; sum =9; maxSum =15 => Math.max(9,15)
+       sum = Math.max(sum,maxSum)
+       //отбрасывем все отрицательные суммы
+       if(maxSum <0){
+        maxSum=0
+       }
+    }
+    return sum
 }
 
-console.log(getMaxSubSum([-1, 2, 3, -9]));
-console.log(getMaxSubSum([2, -1, 2, 3, -9]));
-console.log(getMaxSubSum([-1, 2, 3, -9, 11]));
-console.log(getMaxSubSum([-2, -1, 1, 2]));
-console.log(getMaxSubSum([100, -9, 2, -3, 5]));
-console.log(getMaxSubSum([1, 2, 3]));
+console.log(getMaxSubSum([-1, 2, 3, -9]));//5 -DONE
+console.log(getMaxSubSum([2, -1, 2, 3, -9]));//6 -DONE
+console.log(getMaxSubSum([-1, 2, 3, -9, 11]));//11  -DONE
+console.log(getMaxSubSum([-2, -1, 1, 2]));//3 -DONE
+console.log(getMaxSubSum([100, -9, 2, -3, 5]));//100 -DONE
+console.log(getMaxSubSum([1, 2, 3]));//6 -DONE
+
+/*14.Напишите функцию camelize(str), которая преобразует строки вида «my-short-string» в «myShortString». То есть дефисы удаляются, а все слова после них получают заглавную букву.*/
+function camelize(str){
+    //если слово 1 оставитт без изменений, если нет, первую букву каждого последующего слова делать большой, начиная со второй буквы всатвляется остаток слова до конца
+    let newStr = str.split('-')
+    .map((word, index) =>
+    index == 0 ? word : word[0].toUpperCase() + word.slice(1))
+    .join('')
+
+    return newStr;
+}
+
+console.log(camelize("background-color"));//backgroundColor - DONE
+console.log(camelize("list-style-image"));//listStyleImage - DONE
+console.log(camelize("-webkit-transition"));//WebkitTransition - DONE
+
+/*15.Напишите функцию filterRange(arr, a, b), которая принимает массив arr, ищет элементы со значениями больше или равными a и меньше или равными b и возвращает результат в виде массива.Функция должна возвращать новый массив и не изменять исходный.*/
+function filterRange(arr, a, b){
+    let newArr = arr.filter(function (num){
+        if(num >= a && num <= b){
+            return num;
+        }
+    }
+    )
+    return newArr
+}
+
+let arr = [5, 3, 8, 1];
+console.log(filterRange(arr, 1, 4))//[3, 1] - DONE
+console.log(arr)//[5, 3, 8, 1] - DONE
+
+/*16.Напишите функцию filterRangeInPlace(arr, a, b), которая принимает массив arr и удаляет из него все значения кроме тех, которые находятся между a и b. То есть, проверка имеет вид a ≤ arr[i] ≤ b. Функция должна изменять принимаемый массив и ничего не возвращать.*/
+function filterRangeInPlace(arr, a, b){
+    for(let i=0; i < arr.length; i++){
+        // текущий элемент массив
+        let del = arr[i]
+        //проверяем находится ли в диапазоне от a до b
+        if(a < del || del > b){
+            //удфляем элементы из диапазона
+        arr.splice( i, 1)
+        }
+    }  
+}   
+
+let arr111 = [5, 3, 8, 1];
+console.log(filterRangeInPlace(arr111, 1, 4))
+console.log(arr111)//[3, 1] - DONE
+
+/*17.Напишите функцию filterEvenNumbersInPlace(arr), которая принимает массив целых чисел и удаляет из него все нечетные числа, оставляя только четные. Функция должна изменять переданный массив напрямую.*/
+function filterEvenNumbersInPlace(arr){
+    for(let i=0; i < arr.length; i++){
+        if(arr[i] %2 !== 0){
+            arr.splice(i,1)
+        }
+    } 
+}
+
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+filterEvenNumbersInPlace(numbers);
+console.log(numbers);//[2, 4, 6, 8] - DONE
+
+//18.Сортировать в порядке по убыванию:
+let arr3 = [5, 2, 1, -10, 8];
+arr3.sort().reverse()
+console.log(arr3)//[8, 5, 2, 1, -10] - DONE
+
+/*19.У нас есть массив строк arr. Нужно получить отсортированную копию, но оставить arr неизменённым.Создайте функцию copySorted(arr), которая будет возвращать такую копию. */
+function copySorted(arr){
+   let newArr =  arr.slice().sort();
+    return newArr;
+}
+let arr4 = ["HTML", "JavaScript", "CSS"];
+console.log(copySorted(arr4));// ['CSS', 'HTML', 'JavaScript'] - DONE
+console.log(arr4)//['HTML', 'JavaScript', 'CSS'] - DONE
+
+
+
+/*20.У вас есть массив объектов user, и в каждом из них есть user.name. Напишите код, который преобразует их в массив имён.*/
+let vasya = { name: "Вася", age: 25 };
+let petya = { name: "Петя", age: 30 };
+let masha = { name: "Маша", age: 28 };
+
+let users = [ vasya, petya, masha ];
+
+// let names = [vasya.name, petya.name, masha.name]
+let names = users.map(name=>name.name)
+console.log( names );//['Вася', 'Петя', 'Маша'] - DONE
+
+/*21.Напишите функцию sortByAge(users), которая принимает массив объектов со свойством age и сортирует их по нему.*/
+// function sortByAge(users){
+     
+// }
+// let vasya1 = { name: "Вася", age: 25 };
+// let petya1 = { name: "Петя", age: 30 };
+// let masha1 = { name: "Маша", age: 28 };
+
+// let arr5 = [ vasya1, petya1, masha1 ];
+
+// console.log(sortByAge(arr5))
+
+// // теперь: [vasya, masha, petya]
+// console.log(arr5[0].name); // Вася
+// console.log(arr5[1].name); // Маша
+// console.log(arr5[2].name); // Петя
+
+/*22.Создайте функцию конструктор Calculator, которая создаёт «расширяемые» объекты калькулятора.Задание состоит из двух частей.
+1.Во-первых, реализуйте метод calculate(str), который принимает строку типа "1 + 2" в формате «ЧИСЛО оператор ЧИСЛО» (разделено пробелами) и возвращает результат. Метод должен понимать плюс + и минус -.
+2.Затем добавьте метод addMethod(name, func), который добавляет в калькулятор новые операции. Он принимает оператор name и функцию с двумя аргументами func(a,b), которая описывает его.*/
+// function Calculator(){
+  
+// }
+// let calc = new Calculator;
+// console.log( calc.calculate("3 + 7"));
+
+// let powerCalc = new Calculator();
+// console.log(powerCalc.addMethod("*", (a, b) => a * b));
+// console.log(powerCalc.addMethod("/", (a, b) => a / b));
+// console.log(powerCalc.addMethod("**", (a, b) => a ** b));
