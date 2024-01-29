@@ -269,27 +269,99 @@ let names = users.map(name=>name.name)
 console.log( names );//['Вася', 'Петя', 'Маша'] - DONE
 
 /*21.Напишите функцию sortByAge(users), которая принимает массив объектов со свойством age и сортирует их по нему.*/
-// function sortByAge(users){
-     
+function sortByAge(users){
+    //1 и -1 это порядок, если "a" больше "b" то 1-значит "a" идет после b
+   return users.sort((a,b)=> a.age>b.age ? 1 : -1)
+
+}
+let vasya1 = { name: "Вася", age: 25 };
+let petya1 = { name: "Петя", age: 30 };
+let masha1 = { name: "Маша", age: 28 };
+
+let arr5 = [ vasya1, petya1, masha1 ];
+
+console.log(sortByAge(arr5))// - DONE
+
+/*22.Напишите функцию getAverageAge(users), которая принимает массив объектов со свойством age и возвращает средний возраст. Формула вычисления среднего арифметического значения: (age1 + age2 + ... + ageN) / N. */
+function getAverageAge(users){
+    const ages = users.map(age =>age.age);
+    const middleAge = ages.reduce((sum,cur)=>sum+cur,0) / users.length
+    return Math.ceil(middleAge)
+}
+
+console.log(getAverageAge(arr5));//28 - DONE
+
+/*23.Пусть arr – массив строк.Напишите функцию unique(arr), которая возвращает массив, содержащий только уникальные элементы arr. */
+function unique(arr) {
+    const unigeItem =[]
+   for(let i =0; i<arr.length; i++){
+    if (!unigeItem.includes(arr[i])){
+       unigeItem.push(arr[i])
+    }
+   }
+   return unigeItem
+  }
+  
+  let strings = ["кришна", "кришна", "харе", "харе",
+    "харе", "харе", "кришна", "кришна", ":-O"
+  ];
+  
+  console.log(unique(strings))//['кришна', 'харе', ':-O'] - DONE
+
+/*24.У вас есть массив объектов user, и у каждого из объектов есть name, surname и id.Напишите код, который создаст ещё один массив объектов с параметрами id и fullName, где fullName – состоит из name и surname.*/
+function getNewObj(arr){
+    let newArr = arr.map(user=> ({
+        fullName: `${user.name} ${user.surname}`,
+        id: user.id
+    }))
+    return newArr
+}
+
+let vasya11 = { name: "Вася", surname: "Пупкин", id: 1 };
+let petya11 = { name: "Петя", surname: "Иванов", id: 2 };
+let masha11 = { name: "Маша", surname: "Петрова", id: 3 };
+
+let users11 = [ vasya11, petya11, masha11 ];
+
+let usersMapped = getNewObj(users11)
+console.log(usersMapped)// -DONE
+
+/*25.Допустим, мы получили массив пользователей в виде {id:..., name:..., age:... }.Создайте функцию groupById(arr), которая создаст из него объект с id в качестве ключа и элементами массива в качестве значений. Используйте метод .reduce в решении.*/
+function groupById(arr){
+    //value -эл-т массива
+    let newObj = arr.reduce((obj,value)=>{
+        obj[value.id]= value
+        return obj
+    },{})
+    return newObj
+ 
+}
+let users1 = [
+    {id: 'john', name: "John Smith", age: 20},
+    {id: 'ann', name: "Ann Smith", age: 24},
+    {id: 'pete', name: "Pete Peterson", age: 31},
+  ];
+  
+  let usersById = groupById(users1);
+  console.log(usersById)
+/*26.Напишите функцию shuffle(array), которая перемешивает (переупорядочивает случайным образом) элементы массива.Многократные прогоны через shuffle могут привести к разным последовательностям элементов.*/
+// function shuffle(array){
+    
 // }
-// let vasya1 = { name: "Вася", age: 25 };
-// let petya1 = { name: "Петя", age: 30 };
-// let masha1 = { name: "Маша", age: 28 };
+// let arr2 = [1, 2, 3];
 
-// let arr5 = [ vasya1, petya1, masha1 ];
+// console.log(shuffle(arr2));
+// // arr = [3, 2, 1]
 
-// console.log(sortByAge(arr5))
+// console.log(shuffle(arr2));
+// // arr = [2, 1, 3]
 
-// // теперь: [vasya, masha, petya]
-// console.log(arr5[0].name); // Вася
-// console.log(arr5[1].name); // Маша
-// console.log(arr5[2].name); // Петя
-
-/*22.Создайте функцию конструктор Calculator, которая создаёт «расширяемые» объекты калькулятора.Задание состоит из двух частей.
+// console.log(shuffle(arr2));
+/*.Создайте функцию конструктор Calculator, которая создаёт «расширяемые» объекты калькулятора.Задание состоит из двух частей.
 1.Во-первых, реализуйте метод calculate(str), который принимает строку типа "1 + 2" в формате «ЧИСЛО оператор ЧИСЛО» (разделено пробелами) и возвращает результат. Метод должен понимать плюс + и минус -.
 2.Затем добавьте метод addMethod(name, func), который добавляет в калькулятор новые операции. Он принимает оператор name и функцию с двумя аргументами func(a,b), которая описывает его.*/
 // function Calculator(){
-  
+
 // }
 // let calc = new Calculator;
 // console.log( calc.calculate("3 + 7"));
@@ -298,3 +370,5 @@ console.log( names );//['Вася', 'Петя', 'Маша'] - DONE
 // console.log(powerCalc.addMethod("*", (a, b) => a * b));
 // console.log(powerCalc.addMethod("/", (a, b) => a / b));
 // console.log(powerCalc.addMethod("**", (a, b) => a ** b));
+
+
