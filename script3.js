@@ -343,32 +343,97 @@ let users1 = [
   ];
   
   let usersById = groupById(users1);
-  console.log(usersById)
-/*26.Напишите функцию shuffle(array), которая перемешивает (переупорядочивает случайным образом) элементы массива.Многократные прогоны через shuffle могут привести к разным последовательностям элементов.*/
-// function shuffle(array){
+  console.log(usersById)// - DONE
+
+/*26.Создайте функцию unique(arr), которая вернёт массив уникальных, не повторяющихся значений массива arr.*/
+function unique1(arr) {
+    let newArr =[]
+   arr = new Set(arr)
+   for(let value of arr){
+    newArr.push(value)
+   }
+   return  newArr
+  }
+  
+  let values1 = ["Hare", "Krishna", "Hare", "Krishna",
+    "Krishna", "Krishna", "Hare", "Hare", ":-O"
+  ];
+  
+  console.log( unique1(values1) );//['Hare', 'Krishna', ':-O'] - DONE
+
+/*27.Анаграммы – это слова, у которых те же буквы в том же количестве, но они располагаются в другом порядке.Напишите функцию aclean(arr), которая возвращает массив слов, очищенный от анаграмм.*/
+function aclean(arr){
+    //сопоставить анограмы
+    let map = new Map()
+    for(let word of arr){
+        //находим соотвествующий ключ
+        let sort = word.toLowerCase().split('').sort().join('')
+        //вытаскиваем ключ значение
+        map.set(sort,word)
+    }
+    //по значению формируем в массив
+    return Array.from(map.values())
+}
     
-// }
-// let arr2 = [1, 2, 3];
 
-// console.log(shuffle(arr2));
-// // arr = [3, 2, 1]
+let arr7 = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+console.log( aclean(arr7) )
 
-// console.log(shuffle(arr2));
-// // arr = [2, 1, 3]
+/*28.Мы хотели бы получить массив ключей map.keys() в переменную и далее работать с ними, например, применить метод .push.Почему? Что нужно поправить в коде, чтобы вызов keys.push сработал?*/
+let map = new Map();
+map.set("name", "John");
+let keys = Array.from(map.keys());//нужно преобразовать в массив
+console.log(keys)
+keys.push("more");
+console.log(keys)//['name', 'more'] - DONE
 
-// console.log(shuffle(arr2));
-/*.Создайте функцию конструктор Calculator, которая создаёт «расширяемые» объекты калькулятора.Задание состоит из двух частей.
-1.Во-первых, реализуйте метод calculate(str), который принимает строку типа "1 + 2" в формате «ЧИСЛО оператор ЧИСЛО» (разделено пробелами) и возвращает результат. Метод должен понимать плюс + и минус -.
-2.Затем добавьте метод addMethod(name, func), который добавляет в калькулятор новые операции. Он принимает оператор name и функцию с двумя аргументами func(a,b), которая описывает его.*/
-// function Calculator(){
+/*29.У вас есть к ним доступ, но управление этим массивом происходит где-то ещё. Добавляются новые сообщения и удаляются старые, и вы не знаете в какой момент это может произойти.Имея такую вводную информацию, решите, какую структуру данных вы могли бы использовать для ответа на вопрос «было ли сообщение прочитано?». Структура должна быть подходящей, чтобы можно было однозначно сказать, было ли прочитано это сообщение для каждого объекта сообщения.P.S. Когда сообщение удаляется из массива messages, оно должно также исчезать из структуры данных.P.P.S. Нам не следует модифицировать сами объекты сообщений, добавлять туда свойства. Если сообщения принадлежат какому-то другому коду, то это может привести к плохим последствиям.*/
+let readMessages = new WeakSet()
+let messages = [
+    {text: "Hello", from: "John"},
+    {text: "How goes?", from: "John"},
+    {text: "See you soon", from: "Alice"}
+  ];
+readMessages.add(messages[0])
+readMessages.add(messages[1])
 
-// }
-// let calc = new Calculator;
-// console.log( calc.calculate("3 + 7"));
+console.log(readMessages.has(messages[0])); // true - DONE
+console.log(readMessages.has(messages[1]))// true - DONE
 
-// let powerCalc = new Calculator();
-// console.log(powerCalc.addMethod("*", (a, b) => a * b));
-// console.log(powerCalc.addMethod("/", (a, b) => a / b));
-// console.log(powerCalc.addMethod("**", (a, b) => a ** b));
+/*30.Теперь вопрос стоит так: какую структуру данных вы бы предложили использовать для хранения информации о том, когда сообщение было прочитано?В предыдущем задании нам нужно было сохранить только факт прочтения «да или нет». Теперь же нам нужно сохранить дату, и она должна исчезнуть из памяти при удалении «сборщиком мусора» сообщения.P.S. Даты в JavaScript можно хранить как объекты встроенного класса Date, которые мы разберём*/
+let dateRead = new WeakMap()
+let dateReadMassage = new Date()
+let infoMessages = dateRead.set(messages[0], dateReadMassage)
+
+console.log(infoMessages)//- DONE
+
+/*31.Есть объект salaries с произвольным количеством свойств, содержащих заработные платы.Напишите функцию sumSalaries(salaries), которая возвращает сумму всех зарплат с помощью метода Object.values и цикла for..of.Если объект salaries пуст, то результат должен быть 0.*/
+function sumSalaries(obj){
+    let sum =0
+    for(let money of Object.values(obj)){
+        sum +=money
+    }
+    return sum
+}
+
+let salaries = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+  };
+  
+console.log( sumSalaries(salaries) );//650 - DONE
+
+/*32.Напишите функцию count(obj), которая возвращает количество свойств объекта:Постарайтесь сделать код как можно короче.P.S. Игнорируйте символьные свойства, подсчитывайте только «обычные».*/
+function count(obj){
+    return Object.keys(obj).length
+}
+let user = {
+    name: 'John',
+    age: 30
+  };
+  
+console.log( count(user) );//2- DONE
+
 
 
