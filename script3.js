@@ -435,5 +435,137 @@ let user = {
   
 console.log( count(user) );//2- DONE
 
+/*33.Напишите деструктурирующее присваивание, которое:свойство name присвоит в переменную name.свойство years присвоит в переменную age.свойство isAdmin присвоит в переменную isAdmin (false, если нет такого свойства)*/
+
+let user8 = {
+    name: "John",
+    years: 30
+  };
+
+let {name,  years: age, isAdmin = false} = user8
+  
+console.log( name ); // John - DONE
+console.log( age ); // 30 - DONE
+console.log( isAdmin );//false - DONE
+
+/*34.Создайте функцию topSalary(salaries), которая возвращает имя самого высокооплачиваемого сотрудника.Если объект salaries пустой, то нужно вернуть null.Если несколько высокооплачиваемых сотрудников, можно вернуть любого из них.P.S. Используйте Object.entries и деструктурирование, чтобы перебрать пары ключ/значение.*/
+function topSalary(salaries){
+    let maxName = null;
+    let maxSal = 0
+    for(let [person, salary] of Object.entries(salaries)){ 
+        if(salary > maxSal){
+        //записываем сумму и проходимся по всем перезаписывая, пока не анйдем большую
+           maxSal = salary
+           maxName = person
+        }
+    }
+    return maxName;
+}
+
+let salaries2 = {
+    "John": 100,
+    "Pete": 300,
+    "Mary": 250
+  };
+
+console.log(topSalary(salaries2))//Pete - DONE
+
+//35.Создайте объект Date для даты: 20 февраля 2012 года, 3 часа 12 минут. Временная зона – местная.
+let date = new Date(2012, 1,20, 3, 12 )
+console.log(date)//Mon Feb 20 2012 00:00:00 GMT+0400 (Москва, стандартное время) - DONE
+
+/*36.Напишите функцию getWeekDay(date), показывающую день недели в коротком формате: «ПН», «ВТ», «СР», «ЧТ», «ПТ», «СБ», «ВС».*/
+function getWeekDay(date){
+    let arr =["ПН", "ВТ", "СР", "ЧТ", "ПТ","СБ", "ВС"]
+    let d = date.getDay()
+    for(let i =0; i<arr.length; i++){
+        if(d-1 === i){
+            return arr[i]
+        } 
+    }
+}
+
+let date1 = new Date(2012, 0, 3);  
+let date2 = new Date(2024, 0, 31);  
+console.log( getWeekDay(date1) );//ВТ - DONE
+console.log( getWeekDay(date2) );//CР - DONE
+
+/*37.В Европейских странах неделя начинается с понедельника (день номер 1), затем идёт вторник (номер 2) и так до воскресенья (номер 7). Напишите функцию getLocalDay(date), которая возвращает «европейский» день недели для даты date.*/
+function getLocalDay(date){
+    return date.getDay()
+}
+
+let date3 = new Date(2012, 0, 3);  // 3 января 2012 года
+console.log( getLocalDay(date3) ); //2 - DONE
+
+/*38.Создайте функцию getDateAgo(date, days), возвращающую число, которое было days дней назад от даты date.
+К примеру, если сегодня двадцатое число, то getDateAgo(new Date(), 1) вернёт девятнадцатое и getDateAgo(new Date(), 2) – восемнадцатое.Функция должна надёжно работать при значении days=365 и больших значениях:*/
+function getDateAgo(date, days){
+    let d = new Date(date)
+    d.setDate(d.getDate() - days)
+    return d.getDate()
+}
+let date4 = new Date(2015, 0, 2);
+
+console.log( getDateAgo(date4, 1) ); // 1, (1 Jan 2015) - DONE
+console.log( getDateAgo(date4, 2) ); // 31, (31 Dec 2014) - DONE
+console.log( getDateAgo(date4, 365) ); // 2, (2 Jan 2014) - DONE
+
+/*39.Напишите функцию getLastDayOfMonth(year, month), возвращающую последнее число месяца. Иногда это 30, 31 или даже февральские 28/29.
+Параметры:year – год из четырёх цифр, например, 2012.month – месяц от 0 до 11.К примеру, getLastDayOfMonth(2012, 1) = 29 (високосный год, февраль).*/
+function getLastDayOfMonth(year, month){
+    let y = new Date(year, month+1, 0);
+    return y.getDate()
+}
+console.log(getLastDayOfMonth(2012, 1))//29 - DONE
+
+/*40.Напишите функцию getSecondsToday(), возвращающую количество секунд с начала сегодняшнего дня.Функция должна работать в любой день, т.е. в ней не должно быть конкретного значения сегодняшней даты.*/
+function getSecondsToday(){
+  let now = new Date();
+  let today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  let ms = now - today;
+  return Math.floor(ms / 1000)
+}
+
+console.log(getSecondsToday())//- DONE
+/*41.Напишите функцию formatDate(date), форматирующую date по следующему принципу:
+Если спустя date прошло менее 1 секунды, вывести "прямо сейчас".
+В противном случае, если с date прошло меньше 1 минуты, вывести "n сек. назад".
+В противном случае, если меньше часа, вывести "m мин. назад".
+В противном случае, полная дата в формате "DD.MM.YY HH:mm". А именно: "день.месяц.год часы:минуты", всё в виде двух цифр, т.е. 31.12.16 10:00.*/
+
+function formatDate(date){
 
 
+}
+
+
+console.log( formatDate(new Date(new Date - 1)) ); // "прямо сейчас"
+
+console.log( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
+
+console.log( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
+
+// вчерашняя дата вроде 31.12.2016, 20:00
+console.log( formatDate(new Date(new Date - 86400 * 1000)) );
+
+// let now = new Date();20
+// console.log( now )
+// let Jan01_1970 = new Date(0);
+// console.log( Jan01_1970 );
+// let date = new Date();
+// console.log( date.getHours() );
+// console.log( date.getMinutes() );
+// console.log( date.getTime() );
+// console.log(new Date().getTimezoneOffset())
+
+// let today = new Date();
+
+// today.setHours(0);
+// console.log(today); // выводится сегодняшняя дата, но значение часа будет 0
+
+// today.setHours(0, 0, 0, 0);
+// console.log(today);
+
+// let date1 = new Date(2024, 0, 32)
+// console.log(date1)//Автоисправление даты
