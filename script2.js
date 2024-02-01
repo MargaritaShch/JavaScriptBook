@@ -170,3 +170,36 @@ accumulator.read(); // прибавляет введённое пользова�
 accumulator.read(); // прибавляет введённое пользователем значение к текущему значению
 
 console.log(accumulator.value); // выведет сумму этих значений - DONE
+
+/*11.Во-первых, реализуйте метод calculate(str), который принимает строку типа "1 + 2" в формате «ЧИСЛО оператор ЧИСЛО» (разделено пробелами) и возвращает результат. Метод должен понимать плюс + и минус -.Затем добавьте метод addMethod(name, func), который добавляет в калькулятор новые операции. Он принимает оператор name и функцию с двумя аргументами func(a,b), которая описывает его.*/
+function Calculator(){
+    this.calculate = function(str){
+      let arr =  str.split(' ');
+      let a = +arr[0]
+      let sign = arr[1]
+      let b = +arr[2]
+      return this[sign](a,b)
+    }
+
+    this.addMethod = function(name, func){
+      this[name] = func
+    }
+
+    this["+"] = function(a,b){
+      return a + b
+    }
+    this["-"] = function(a,b){
+      return a - b
+    }
+}
+
+let calc = new Calculator;
+console.log( calc.calculate("3 + 7") ); 
+
+let powerCalc = new Calculator;
+powerCalc.addMethod("*", (a, b) => a * b);
+powerCalc.addMethod("/", (a, b) => a / b);
+powerCalc.addMethod("**", (a, b) => a ** b);
+
+let result = powerCalc.calculate("2 ** 3");
+console.log( result );
