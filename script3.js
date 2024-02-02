@@ -528,27 +528,31 @@ function getSecondsToday(){
 }
 
 console.log(getSecondsToday())//- DONE
-/*41.Напишите функцию formatDate(date), форматирующую date по следующему принципу:
-Если спустя date прошло менее 1 секунды, вывести "прямо сейчас".
-В противном случае, если с date прошло меньше 1 минуты, вывести "n сек. назад".
-В противном случае, если меньше часа, вывести "m мин. назад".
-В противном случае, полная дата в формате "DD.MM.YY HH:mm". А именно: "день.месяц.год часы:минуты", всё в виде двух цифр, т.е. 31.12.16 10:00.*/
 
+/*41.Напишите функцию formatDate(date), форматирующую date по следующему принципу:Если спустя date прошло менее 1 секунды, вывести "прямо сейчас".В противном случае, если с date прошло меньше 1 минуты, вывести "n сек. назад".В противном случае, если меньше часа, вывести "m мин. назад".В противном случае, полная дата в формате "DD.MM.YY HH:mm". А именно: "день.месяц.год часы:минуты", всё в виде двух цифр, т.е. 31.12.16 10:00.*/
 function formatDate(date){
-
-
+    let currDate = new Date();
+    //ms/100 = sec
+    let secPass = (currDate - date)/1000
+    if(secPass <1){
+         messages ='прямо сейчас';
+    } else if(secPass<60){
+         messages = `${secPass} сек. назад`;
+    } else if(secPass <3600 && secPass>60){
+        messages = `${secPass/60} мин. назад`;
+    } else{
+        let d = date;
+        let res = d -secPass
+        messages = `${'0'+date.getDate()}.${'0'+date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+    }
+    return messages
 }
 
-
-console.log( formatDate(new Date(new Date - 1)) ); // "прямо сейчас"
-
-console.log( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад"
-
-console.log( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад"
-
+console.log( formatDate(new Date(new Date - 1)) ); // "прямо сейчас" - DONE
+console.log( formatDate(new Date(new Date - 30 * 1000)) ); // "30 сек. назад" - DONE
+console.log( formatDate(new Date(new Date - 5 * 60 * 1000)) ); // "5 мин. назад" - DONE
 // вчерашняя дата вроде 31.12.2016, 20:00
-console.log( formatDate(new Date(new Date - 86400 * 1000)) );
-
+console.log( formatDate(new Date(new Date - 86400 * 1000)) );//almost DONE
 // let now = new Date();20
 // console.log( now )
 // let Jan01_1970 = new Date(0);
