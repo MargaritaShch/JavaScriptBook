@@ -36,4 +36,41 @@ function fib(n) {
 console.log(fib(3)); // 2 - DONE
 console.log(fib(7)); // 13 - DONE
 console.log(fib(77)); // 5527939700884757: my result =1483 
+/*4.Напишите функцию printList(list), которая выводит элементы списка по одному.Сделайте два варианта решения: используя цикл и через рекурсию.*/
+let list = {
+  value: 1,
+  next: {
+    value: 2,
+    next: {
+      value: 3,
+      next: {
+        value: 4,
+        next: null
+      }
+    }
+  }
+};
+// function printList(list){
+//   alert(list.value)
+//   if(list.next){
+//     printList(list.next)
+//   }
+// }
+// printList(list) - DONE
 
+/*5.Выведите односвязный список из предыдущего задания Вывод односвязного списка в обратном порядке.*/
+// function printList(list){
+//   if(list.next){
+//     printList(list.next)
+//   }
+//   alert(list.value)
+// }
+// printList(list)// - DONE
+
+/*6.Напишите функцию sum, которая работает таким образом: sum(a)(b) = a+b.Да, именно таким образом, используя двойные круглые скобки (не опечатка). */
+function sum(a){
+  return function (b){
+    return sum = a+b
+  }
+}
+console.log( sum(1)(2) )//3 -DONE
