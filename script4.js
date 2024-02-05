@@ -127,33 +127,62 @@ function makeArmy() {
 let army = makeArmy();
 
 // все стрелки выводят 10 вместо их порядковых номеров (0, 1, 2, 3...)
-console.log(army[0]()); // 10 от стрелка с порядковым номером 0
-console.log(army[1]()); // 10 от стрелка с порядковым номером 1
-console.log(army[2]()); // 10 ...и т.д.
+console.log(army[0]()); // 0 - DONE
+console.log(army[1]()); // 1 - DONE
+console.log(army[2]()); // 2 - DONE
 
 /*10.Измените код makeCounter() так, чтобы счётчик мог уменьшать и устанавливать значение:
 counter() должен возвращать следующее значение (как и раньше).
 counter.set(value) должен устанавливать счётчику значение value.
 counter.decrease() должен уменьшать значение счётчика на 1.
 Посмотрите код из песочницы с полным примером использования.P.S. Для того, чтобы сохранить текущее значение счётчика, можно воспользоваться как замыканием, так и свойством функции. Или сделать два варианта решения: и так, и так.*/
-
 function makeCounter() {
   let count = 0;
 
+ function counter(){
+   return count++;
+  }
+  counter.set = value => count = value;
+  counter.decrease = () => count--;
 
+  return counter;
 }
-
+  
 let counter = makeCounter();
 
-console.log( counter() ); // 0
-console.log( counter() ); // 1
-
+console.log( counter() ); // 0 - DONE
+console.log( counter() ); // 1 - DONE
 counter.set(10); // установить новое значение счётчика
+console.log( counter() ); // 10 - DONE
+counter.decrease(); // уменьшить значение счётчика на 1
+console.log( counter() ); // 10 (вместо 11) - DONE
 
-// console.log( counter() ); // 10
+/*11.Напишите функцию printNumbers(from, to), которая выводит число каждую секунду, начиная от from и заканчивая to.Сделайте два варианта решения.Используя setInterval.Используя рекурсивный setTimeout.*/
+// function printNumbers(from, to){
+//   let curNum = from
+//   let showNum = setInterval(function(){
+//     alert(curNum)
+//     if(curNum === to){
+//       clearInterval(showNum) 
+//     } 
+//     curNum++
+//  },1000)
+// }
 
-// counter.decrease(); // уменьшить значение счётчика на 1
+// console.log(printNumbers(1, 5))//- DONE
 
-// console.log( counter() ); // 10 (вместо 11)
+// function printNumbers1(from, to){
+//   let curNum = from
+//   let showNum = setTimeout(function num(){
+//     alert(curNum) 
+//     showNum =setTimeout(num,1000);
+//     if(curNum === to){
+//       clearInterval(showNum) 
+//     }
+//     curNum++
+//   },1000)
+// }
+
+// console.log(printNumbers1(2, 7))//- DONE - не уверена в решении и что это рекурсия
 
 
