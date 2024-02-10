@@ -97,7 +97,7 @@ class Clock {
 
 class ExtendedClock extends Clock{
   constructor({ template },precision =1000){
-    this.template = template;
+    super(template);
     this.precision = precision
   }
   start() {
